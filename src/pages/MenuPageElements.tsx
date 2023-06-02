@@ -16,15 +16,15 @@ export default function MenuPageElements({ pathName }: IMenuPageElementsProps) {
       />
       <MenuElement
         isHome={false}
-        title="Portraits"
-        navigationPath="/portraits"
-        isSelected={pathName === "/portraits"}
+        title="Paysages / Objets"
+        navigationPath="/paysages-objets"
+        isSelected={pathName === "/paysages-objets"}
       />
       <MenuElement
         isHome={false}
-        title="Paysages"
-        navigationPath="/paysages"
-        isSelected={pathName === "/paysages"}
+        title="Portraits / Animaux"
+        navigationPath="/portraits-animaux"
+        isSelected={pathName === "/portraits-animaux"}
       />
       <MenuElement
         isHome={false}

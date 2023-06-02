@@ -1,47 +1,32 @@
 import React from 'react';
 import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActionArea from '@mui/material/CardActionArea';
+import Typography from '@mui/material/Typography';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import EyeIcon from '@mui/icons-material/Visibility';
 import CardDialog from './CardDialog';
-import CardBottom from './CardBottom';
-import CardTop from './CardTop';
 
 interface ICardItemProps {
   readonly mediaFile: string;
-  readonly mediaType: "video" | "audio" | "picture" | "iframe" | "img";
-  readonly mediaHeight?: number;
   readonly clickable?: boolean;
   readonly title?: string;
   readonly subtitle?: string;
   readonly description?: string;
-  readonly demoLink?: string;
-  readonly githubPath?: string;
-  readonly githubBackendPath?: string;
-  readonly githubFrontendPath?: string;
-  readonly websiteUrl?: string;
-  readonly downloadUrl?: string;
 }
 
 export default function CardItem({
   clickable = false,
   mediaFile,
-  mediaType,
-  mediaHeight,
   title,
   subtitle,
   description,
-  demoLink,
-  githubPath,
-  githubFrontendPath,
-  githubBackendPath,
-  websiteUrl,
-  downloadUrl,
 }: ICardItemProps) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  const handleCardClick = () => {
-    if (demoLink) {
-      window.open(demoLink, "_blank", "noreferrer");
-    } else {
-      setIsDialogOpen(true);
-    }
+  const handleClick = () => {
+    setIsDialogOpen(true);
   };
   const closeDialog = () => {
     setIsDialogOpen(false);
@@ -59,32 +44,45 @@ export default function CardItem({
           justifyContent: "space-between",
         }}
       >
-        <CardTop
-          clickable={clickable}
-          mediaFile={mediaFile}
-          mediaType={mediaType}
-          mediaHeight={mediaHeight}
-          title={title}
-          subtitle={subtitle}
-          description={description}
-          demoLink={demoLink}
-          websiteUrl={websiteUrl}
-          downloadUrl={downloadUrl}
-          handleClick={handleCardClick}
-        />
-        <CardBottom
-          githubPath={githubPath}
-          githubFrontendPath={githubFrontendPath}
-          githubBackendPath={githubBackendPath}
-          websiteUrl={websiteUrl}
-          downloadUrl={downloadUrl}
-        />
+        <CardActionArea
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+          }}
+          disableRipple={clickable ? false : true}
+          disabled={clickable ? false : true}
+          onClick={clickable ? () => handleClick() : () => null}
+        >
+          <CardMedia sx={{ height: 230 }} component="img" src={mediaFile} alt={title ?? subtitle} />
+          <CardContent>
+            {title ? (
+              <Typography variant="h6" gutterBottom>
+                {title}
+              </Typography>
+            ) : null}
+            {subtitle ? (
+              <Typography variant="body1" color="text.secondary" fontStyle="italic" gutterBottom>
+                {subtitle}
+              </Typography>
+            ) : null}
+            {description ? (
+              <Typography variant="body2" color="text.secondary">
+                {description}
+              </Typography>
+            ) : null}
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" variant="outlined" onClick={() => handleClick()} startIcon={<EyeIcon />}>Voir</Button>
+        </CardActions>
       </Card>
       <CardDialog
         isOpen={isDialogOpen}
         handleClose={closeDialog}
         mediaFile={mediaFile}
-        mediaType={mediaType}
         title={title}
         subtitle={subtitle}
         description={description}

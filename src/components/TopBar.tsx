@@ -15,7 +15,7 @@ interface ITopBarProps {
   readonly subtitle?: string;
 };
 
-const appBarHeight = (version: VersionType) => version === "full" ? "500px" : "210px";
+const appBarHeight = (version: VersionType) => version === "full" ? "500px" : "150px";
 
 const appBar = ({ version, backgroundFile, title, subtitle }: ITopBarProps) => {
   const requireBackgroundFile = require(`../media/${backgroundFile}`);

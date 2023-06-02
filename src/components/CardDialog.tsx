@@ -2,17 +2,16 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogContentText from '@mui/material/DialogContentText';
 import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
 
 interface ICardDialogProps {
   readonly isOpen: boolean;
   readonly handleClose: () => void;
   readonly mediaFile: string;
-  readonly mediaType: "video" | "audio" | "picture" | "iframe" | "img";
   readonly title?: string;
   readonly subtitle?: string;
   readonly description?: string;
@@ -22,16 +21,13 @@ export default function CardDialog({
   isOpen,
   handleClose,
   mediaFile,
-  mediaType,
   title,
   subtitle,
   description
 }: ICardDialogProps) {
   return (
-    <Dialog open={isOpen} onClose={handleClose} maxWidth="xl" fullWidth>
+    <Dialog open={isOpen} onClose={handleClose} fullScreen>
       <DialogTitle>
-        {title ? <Typography variant="h5" gutterBottom textTransform="uppercase">{title}</Typography> : null}
-        {subtitle ? <Typography>{subtitle}</Typography> : null}
         <IconButton
           aria-label="Fermer"
           onClick={handleClose}
@@ -45,17 +41,19 @@ export default function CardDialog({
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
         <CardMedia
-          sx={{ height: "100%" }}
-          component={mediaType}
+          sx={{ objectFit: "contain", height: "100%" }}
+          component="img"
           src={mediaFile}
           alt={title ?? subtitle}
         />
-        {description ? (
-          <DialogContentText paddingTop="16px" fontStyle="italic">
-            <Typography>{description}</Typography>
-          </DialogContentText>
+        {title || subtitle || description ? (
+          <Grid paddingTop="16px">
+            {title ? <DialogContentText variant="h6" color="text.primary">{title}</DialogContentText> : null}
+            {title ? <DialogContentText variant="body1" fontStyle="italic" gutterBottom>{subtitle}</DialogContentText> : null}
+            {title ? <DialogContentText variant="body2">{description}</DialogContentText> : null}
+          </Grid>
         ) : null}
       </DialogContent>
     </Dialog>

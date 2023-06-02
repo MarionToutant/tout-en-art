@@ -1,6 +1,6 @@
 # ART TOUT-EN-M
 
-This is my art projects, I hope you'll enjoy them!
+These are my art projects, I hope you'll like them!
 
 ## Available Scripts
 
