@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import MenuDrawer from '../components/MenuDrawer';
-import TopBar from '../components/TopBar';
+import MasterPage from '../components/MasterPage';
 import EnvulminuresCard from '../components/cards/landscapes/EnvulminuresCard';
 import ConcertCard from '../components/cards/landscapes/ConcertCard';
 import ImaginaryWorldCard from '../components/cards/landscapes/ImaginaryWorldCard';
@@ -18,26 +17,20 @@ import PillCard from '../components/cards/landscapes/PillCard';
 
 export default function LandscapesAndObjects() {
   return (
-    <Grid display="flex">
-      <MenuDrawer />
-      <Grid display="flex" flexDirection="column">
-        <TopBar version="mini" backgroundFile="landscapes/concert.jpg" title="Art Tout-en-M" subtitle="Site personnel de créations artistiques" />
-        <Grid container margin="0px 0px 40px 0px" display="flex" spacing={4}>
-          <Grid item><EnvulminuresCard /></Grid>
-          <Grid item><ConcertCard /></Grid>
-          <Grid item><ImaginaryWorldCard /></Grid>
-          <Grid item><ParisCard /></Grid>
-          <Grid item><PillCard /></Grid>
-          <Grid item><MontrealCard /></Grid>
-          <Grid item><LimogesCard /></Grid>
-          <Grid item><NafelsCard /></Grid>
-          <Grid item><SnowCard /></Grid>
-          <Grid item><ElephantsAndTreeCard /></Grid>
-          <Grid item><PinkCityCard /></Grid>
-          <Grid item><EguzonCard /></Grid>
-          <Grid item><DistopyCard /></Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    <MasterPage topBarVersion="mini">
+      <Grid item><EnvulminuresCard /></Grid>
+      <Grid item><ConcertCard /></Grid>
+      <Grid item><ImaginaryWorldCard /></Grid>
+      <Grid item><ParisCard /></Grid>
+      <Grid item><PillCard /></Grid>
+      <Grid item><MontrealCard /></Grid>
+      <Grid item><LimogesCard /></Grid>
+      <Grid item><NafelsCard /></Grid>
+      <Grid item><SnowCard /></Grid>
+      <Grid item><ElephantsAndTreeCard /></Grid>
+      <Grid item><PinkCityCard /></Grid>
+      <Grid item><EguzonCard /></Grid>
+      <Grid item><DistopyCard /></Grid>
+    </MasterPage>
   );
 }

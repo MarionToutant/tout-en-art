@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import MenuDrawer from '../components/MenuDrawer';
-import TopBar from '../components/TopBar';
+import MasterPage from '../components/MasterPage';
 import ChemistryTeacherCard from '../components/cards/portraits/ChemistryTeacherCard';
 import CousinsCard from '../components/cards/portraits/CousinsCard';
 import DancerCard from '../components/cards/portraits/DancerCard';
@@ -16,24 +15,18 @@ import MathsTeacherCard from '../components/cards/portraits/MathsTeacherCard';
 
 export default function PortraitsAndAnimals() {
   return (
-    <Grid display="flex">
-      <MenuDrawer />
-      <Grid display="flex" flexDirection="column">
-        <TopBar version="mini" backgroundFile="landscapes/concert.jpg" title="Art Tout-en-M" subtitle="Site personnel de créations artistiques" />
-        <Grid container margin="0px 0px 40px 0px" display="flex" spacing={4}>
-          <Grid item><ElephantsCard /></Grid>
-          <Grid item><DavitruveCard /></Grid>
-          <Grid item><DancerCard /></Grid>
-          <Grid item><GrandmotherCard /></Grid>
-          <Grid item><CousinsCard /></Grid>
-          <Grid item><NativeCard /></Grid>
-          <Grid item><PlasticBirdCard /></Grid>
-          <Grid item><LionCard /></Grid>
-          <Grid item><GayLussacCard /></Grid>
-          <Grid item><ChemistryTeacherCard /></Grid>
-          <Grid item><MathsTeacherCard /></Grid>
-        </Grid>
-      </Grid>
-    </Grid>
+    <MasterPage topBarVersion="mini">
+      <Grid item><ElephantsCard /></Grid>
+      <Grid item><DavitruveCard /></Grid>
+      <Grid item><DancerCard /></Grid>
+      <Grid item><GrandmotherCard /></Grid>
+      <Grid item><CousinsCard /></Grid>
+      <Grid item><NativeCard /></Grid>
+      <Grid item><PlasticBirdCard /></Grid>
+      <Grid item><LionCard /></Grid>
+      <Grid item><GayLussacCard /></Grid>
+      <Grid item><ChemistryTeacherCard /></Grid>
+      <Grid item><MathsTeacherCard /></Grid>
+    </MasterPage>
   );
 }

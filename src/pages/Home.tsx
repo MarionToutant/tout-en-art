@@ -1,8 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import MenuDrawer from '../components/MenuDrawer';
-import TopBar from '../components/TopBar';
+import MasterPage from '../components/MasterPage';
 import SeagullCard from '../components/cards/graffitis/SeagullCard';
 import HooligalCard from '../components/cards/graffitis/HooligalCard';
 import ApocapitalismCard from '../components/cards/graffitis/ApocapitalismCard';
@@ -41,54 +40,48 @@ import BowtiesCard from '../components/cards/youth/BowtiesCard';
 
 export default function Home() {
   return (
-    <Grid display="flex" overflow="hidden">
-      <MenuDrawer />
-      <Grid display="flex" flexDirection="column">
-        <TopBar version="full" backgroundFile="landscapes/concert.jpg" title="Art Tout-en-M" subtitle="Site personnel de créations artistiques" />
-        <Grid container margin="0px 0px 40px 0px" display="flex" spacing={4}>
-          <Grid item paddingRight="50px" xs={12}>
-            <Typography variant="h6" color="text.secondary" fontStyle="italic">
-              Ce site donne un aperçu de mes créations artistiques : peintures acryliques, peintures à l’huile, au couteau, pastels, aquarelles, croquis, graffitis…
-              <br /> Bonne visite &#x1F603; !
-            </Typography>
-          </Grid>
-          <Grid item><HooligalCard /></Grid>
-          <Grid item><SeagullCard /></Grid>
-          <Grid item><ApocapitalismCard /></Grid>
-          <Grid item><RadioJuly2Card /></Grid>
-          <Grid item><RadioJulyCard /></Grid>
-          <Grid item><EnvulminuresCard /></Grid>
-          <Grid item><ConcertCard /></Grid>
-          <Grid item><ImaginaryWorldCard /></Grid>
-          <Grid item><ParisCard /></Grid>
-          <Grid item><PillCard /></Grid>
-          <Grid item><MontrealCard /></Grid>
-          <Grid item><LimogesCard /></Grid>
-          <Grid item><NafelsCard /></Grid>
-          <Grid item><SnowCard /></Grid>
-          <Grid item><ElephantsAndTreeCard /></Grid>
-          <Grid item><PinkCityCard /></Grid>
-          <Grid item><EguzonCard /></Grid>
-          <Grid item><DistopyCard /></Grid>
-          <Grid item><ElephantsCard /></Grid>
-          <Grid item><DavitruveCard /></Grid>
-          <Grid item><DancerCard /></Grid>
-          <Grid item><GrandmotherCard /></Grid>
-          <Grid item><CousinsCard /></Grid>
-          <Grid item><NativeCard /></Grid>
-          <Grid item><PlasticBirdCard /></Grid>
-          <Grid item><LionCard /></Grid>
-          <Grid item><GayLussacCard /></Grid>
-          <Grid item><ChemistryTeacherCard /></Grid>
-          <Grid item><MathsTeacherCard /></Grid>
-          <Grid item><JocondeCard /></Grid>
-          <Grid item><LeBlancCard /></Grid>
-          <Grid item><ShedCard /></Grid>
-          <Grid item><LaPalmyreCard /></Grid>
-          <Grid item><BedroomGraffitiCard /></Grid>
-          <Grid item><BowtiesCard /></Grid>
-        </Grid>
+    <MasterPage topBarVersion="full">
+      <Grid item paddingRight="50px" xs={12}>
+        <Typography variant="h6" color="text.secondary" fontStyle="italic">
+          Ce site donne un aperçu de mes créations artistiques : peintures acryliques, peintures à l’huile, au couteau, pastels, aquarelles, croquis, graffitis…
+          <br /> Bonne visite &#x1F603; !
+        </Typography>
       </Grid>
-    </Grid>
+      <Grid item><HooligalCard /></Grid>
+      <Grid item><SeagullCard /></Grid>
+      <Grid item><ApocapitalismCard /></Grid>
+      <Grid item><RadioJuly2Card /></Grid>
+      <Grid item><RadioJulyCard /></Grid>
+      <Grid item><EnvulminuresCard /></Grid>
+      <Grid item><ConcertCard /></Grid>
+      <Grid item><ImaginaryWorldCard /></Grid>
+      <Grid item><ParisCard /></Grid>
+      <Grid item><PillCard /></Grid>
+      <Grid item><MontrealCard /></Grid>
+      <Grid item><LimogesCard /></Grid>
+      <Grid item><NafelsCard /></Grid>
+      <Grid item><SnowCard /></Grid>
+      <Grid item><ElephantsAndTreeCard /></Grid>
+      <Grid item><PinkCityCard /></Grid>
+      <Grid item><EguzonCard /></Grid>
+      <Grid item><DistopyCard /></Grid>
+      <Grid item><ElephantsCard /></Grid>
+      <Grid item><DavitruveCard /></Grid>
+      <Grid item><DancerCard /></Grid>
+      <Grid item><GrandmotherCard /></Grid>
+      <Grid item><CousinsCard /></Grid>
+      <Grid item><NativeCard /></Grid>
+      <Grid item><PlasticBirdCard /></Grid>
+      <Grid item><LionCard /></Grid>
+      <Grid item><GayLussacCard /></Grid>
+      <Grid item><ChemistryTeacherCard /></Grid>
+      <Grid item><MathsTeacherCard /></Grid>
+      <Grid item><JocondeCard /></Grid>
+      <Grid item><LeBlancCard /></Grid>
+      <Grid item><ShedCard /></Grid>
+      <Grid item><LaPalmyreCard /></Grid>
+      <Grid item><BedroomGraffitiCard /></Grid>
+      <Grid item><BowtiesCard /></Grid>
+    </MasterPage>
   );
 }

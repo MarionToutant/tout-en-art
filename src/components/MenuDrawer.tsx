@@ -5,16 +5,23 @@ import Drawer from '@mui/material/Drawer';
 import MenuElement from './MenuElement';
 import MenuPageElements from '../pages/MenuPageElements';
 
-export default function MenuDrawer() {
+export const drawerWidth = 240;
+
+interface IMenuDrawerProps {
+  readonly isOpen: boolean;
+}
+
+export default function MenuDrawer({ isOpen }: IMenuDrawerProps) {
   const location = useLocation();
 
   return (
     <Drawer
-      sx={{ width: 240 }}
-      PaperProps={{ sx: { width: 240 }}}
+      sx={{ width: drawerWidth }}
+      PaperProps={{ sx: { width: drawerWidth }}}
       elevation={8}
-      variant="permanent"
+      variant="persistent"
       anchor="left"
+      open={isOpen}
     >
       <List disablePadding>
         <MenuElement
