@@ -1,26 +1,48 @@
-# ART TOUT-EN-M
+# Art Tout-en-M
 
-These are my art projects, I hope you'll like them!
+Personal website showcasing my artistic creations. Browse paintings, drawings, graffitis, and more organized by category.
 
-## Available Scripts
+## Tech Stack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-In the project directory, you can run:
+- **React 18** + **TypeScript**
+- **Vite** — build tool and dev server
+- **Material-UI (MUI)** — UI components and theming
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Responsive image gallery organized into sections (Graffitis, Paysages & Objets, Portraits & Animaux, Jeunesse)
+- Click any artwork to view it full-size in a modal
+- Mobile-first responsive layout (1 → 2 → 3 → 4 columns)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm run build`
+```bash
+npm install
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:5173](http://localhost:5173) in your browser. The page reloads automatically on changes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Scripts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Command | Description |
+|---|---|
+| `npm start` | Start the development server |
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview the production build locally |
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Home.tsx        # Main gallery layout
+│   ├── TopBar.tsx      # Header banner
+│   ├── CardItem.tsx    # Artwork thumbnail card
+│   └── CardDialog.tsx  # Full-size artwork modal
+├── data/
+│   └── cards.ts        # Artwork data and section definitions
+├── media/              # Artwork images
+└── styles/
+    └── Theme.ts        # MUI theme (black & white palette)
+```
