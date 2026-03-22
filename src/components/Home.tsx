@@ -12,10 +12,10 @@ export default function Home() {
       <TopBar
         height={{ xs: 220, sm: 360, md: 550 }}
         backgroundFile={concertImg}
-        title="Art Tout-en-M"
-        subtitle="Site personnel de créations artistiques"
+        title="Tout-en-M"
+        subtitle="Créations artistiques"
       />
-      <Grid container display="flex" gap={6} sx={{ padding: { xs: '12px', sm: '24px' } }}>
+      <Grid container display="flex" gap={6} sx={{ padding: { xs: '18px 12px', sm: '32px 24px' } }}>
         {sections.map((section) => (
           <Grid key={section.title} item xs={12} container spacing={{ xs: 2, sm: 3, md: 4 }}>
             <Grid item xs={12}>
