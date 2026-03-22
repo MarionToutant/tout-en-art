@@ -1,4 +1,3 @@
-import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -26,8 +25,8 @@ export default function CardDialog({
   description
 }: ICardDialogProps) {
   return (
-    <Dialog open={isOpen} onClose={handleClose} fullScreen>
-      <DialogTitle>
+    <Dialog open={isOpen} onClose={handleClose} fullScreen PaperProps={{ sx: { display: "flex", flexDirection: "column", overflow: "hidden" } }}>
+      <DialogTitle sx={{ flexShrink: 0 }}>
         <IconButton
           aria-label="Fermer"
           onClick={handleClose}
@@ -41,18 +40,18 @@ export default function CardDialog({
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
+      <DialogContent sx={{ display: "flex", flexDirection: "column", overflow: "hidden", padding: "16px" }}>
         <CardMedia
-          sx={{ objectFit: "contain", height: "100%" }}
+          sx={{ objectFit: "contain", flex: "1 1 0", minHeight: 0 }}
           component="img"
           src={mediaFile}
           alt={title ?? subtitle}
         />
         {title || subtitle || description ? (
-          <Grid paddingTop="16px">
-            {title ? <DialogContentText variant="h6" color="text.primary">{title}</DialogContentText> : null}
-            {title ? <DialogContentText variant="body1" fontStyle="italic" gutterBottom>{subtitle}</DialogContentText> : null}
-            {title ? <DialogContentText variant="body2">{description}</DialogContentText> : null}
+          <Grid sx={{ flexShrink: 0, paddingTop: "12px" }}>
+            {title ? <DialogContentText variant="h6" color="text.primary" noWrap>{title}</DialogContentText> : null}
+            {subtitle ? <DialogContentText variant="body1" fontStyle="italic" gutterBottom noWrap>{subtitle}</DialogContentText> : null}
+            {description ? <DialogContentText variant="body2" noWrap>{description}</DialogContentText> : null}
           </Grid>
         ) : null}
       </DialogContent>

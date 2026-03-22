@@ -1,30 +1,25 @@
-import React from 'react';
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
-import EyeIcon from '@mui/icons-material/Visibility';
 import CardDialog from './CardDialog';
 
 interface ICardItemProps {
   readonly mediaFile: string;
-  readonly clickable?: boolean;
   readonly title?: string;
   readonly subtitle?: string;
   readonly description?: string;
 }
 
 export default function CardItem({
-  clickable = false,
   mediaFile,
   title,
   subtitle,
   description,
 }: ICardItemProps) {
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const handleClick = () => {
     setIsDialogOpen(true);
   };
@@ -37,8 +32,8 @@ export default function CardItem({
       <Card
         raised
         sx={{
-          width: 350,
-          height: 430,
+          width: "100%",
+          height: { xs: 300, sm: 360 },
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -52,32 +47,27 @@ export default function CardItem({
             justifyContent: "flex-start",
             alignItems: "flex-start",
           }}
-          disableRipple={clickable ? false : true}
-          disabled={clickable ? false : true}
-          onClick={clickable ? () => handleClick() : () => null}
+          onClick={() => handleClick()}
         >
-          <CardMedia sx={{ height: 230 }} component="img" src={mediaFile} alt={title ?? subtitle} />
-          <CardContent>
+          <CardMedia sx={{ height: { xs: 180, sm: 230 }, flexShrink: 0, objectPosition: "top" }} component="img" src={mediaFile} alt={title ?? subtitle} />
+          <CardContent sx={{ width: "100%", overflow: "hidden" }}>
             {title ? (
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" noWrap>
                 {title}
               </Typography>
             ) : null}
             {subtitle ? (
-              <Typography variant="body1" color="text.secondary" fontStyle="italic" gutterBottom>
+              <Typography variant="body2" color="text.secondary" fontStyle="italic" gutterBottom noWrap>
                 {subtitle}
               </Typography>
             ) : null}
             {description ? (
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" noWrap display="block">
                 {description}
               </Typography>
             ) : null}
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" variant="outlined" onClick={() => handleClick()} startIcon={<EyeIcon />}>Voir</Button>
-        </CardActions>
       </Card>
       <CardDialog
         isOpen={isDialogOpen}
