@@ -4,7 +4,8 @@
   --ink: #202b25;
   --muted: #66716a;
   --hairline: rgba(32, 43, 37, 0.18);
-  --bubble-radius: 44px;
+  --bubble-radius: clamp(12px, 25%, 44px);
+  --bubble-placeholder: #fff;
   --bubble-shadow: 0 5px 14px rgba(27, 35, 30, 0.16);
   --bubble-shadow-raised: 0 9px 22px rgba(27, 35, 30, 0.24);
 }
@@ -47,16 +48,16 @@ button {
   position: absolute;
   z-index: 5;
   top: 0;
-  left: 0;
+  right: 0;
   display: flex;
   flex: 0 0 auto;
-  align-self: flex-start;
-  align-items: center;
-  justify-content: flex-start;
+  align-self: flex-end;
+  align-items: flex-end;
+  justify-content: flex-end;
   width: max-content;
   max-width: 100%;
   min-height: 0;
-  padding: 16px 0 16px max(24px, env(safe-area-inset-left));
+  padding: 16px max(24px, env(safe-area-inset-right)) 16px 0;
   box-sizing: border-box;
   pointer-events: none;
   background: transparent;
@@ -66,9 +67,9 @@ button {
 .top-bar__lockup {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 3px;
-  text-align: left;
+  text-align: right;
 }
 
 .top-bar__title.MuiTypography-root {
@@ -142,8 +143,8 @@ button {
 
 .floating-node--artwork {
   z-index: 1;
-  width: clamp(98px, 14.4svh, 134px);
-  height: clamp(98px, 14.4svh, 134px);
+  width: clamp(72px, 14.4svh, 134px);
+  height: clamp(72px, 14.4svh, 134px);
 }
 
 .floating-node--artwork.floating-node--expanded {
@@ -166,7 +167,7 @@ button {
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.74);
   border-radius: var(--bubble-radius);
-  background-color: #4c514e;
+  background-color: var(--bubble-placeholder);
   box-shadow: var(--bubble-shadow);
   color: #fff;
   cursor: pointer;
@@ -219,7 +220,7 @@ button {
 }
 
 .artwork-button {
-  background: #444a46;
+  background: var(--bubble-placeholder);
   text-align: left;
   cursor: grab;
 }
@@ -277,7 +278,7 @@ button {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(180deg, transparent 70%, rgba(17, 21, 19, 0.12) 78%, rgba(17, 21, 19, 0.82) 100%);
+  background: linear-gradient(180deg, transparent 60%, rgba(17, 21, 19, 0.4) 72%, rgba(17, 21, 19, 0.98) 100%);
   content: '';
   pointer-events: none;
 }
@@ -355,7 +356,7 @@ button {
 
 @media (max-width: 640px) {
   .top-bar {
-    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
   }
 
   .top-bar__title.MuiTypography-root {
@@ -367,23 +368,23 @@ button {
   }
 
   .floating-node--category {
-    width: clamp(94px, 22svh, 140px);
-    height: clamp(94px, 22svh, 140px);
+    width: clamp(78px, 18svh, 120px);
+    height: clamp(78px, 18svh, 120px);
   }
 
   .floating-node--category.floating-node--anchored {
-    width: clamp(110px, 18svh, 130px);
-    height: clamp(110px, 18svh, 130px);
+    width: clamp(60px, 15svh, 110px);
+    height: clamp(60px, 15svh, 110px);
   }
 
   .floating-node--artwork {
-    width: clamp(110px, 18svh, 130px);
-    height: clamp(110px, 18svh, 130px);
+    width: clamp(60px, 15svh, 110px);
+    height: clamp(60px, 15svh, 110px);
   }
 
   .floating-node--artwork.floating-node--expanded {
-    width: min(220px, 50svh, calc(100svh - 220px), calc(100vw - 128px));
-    height: min(220px, 50svh, calc(100svh - 220px), calc(100vw - 128px));
+    width: min(180px, 50svh, calc(100svh - 240px), calc(100vw - 128px));
+    height: min(180px, 50svh, calc(100svh - 240px), calc(100vw - 128px));
   }
 
   .category-bubble__label {
@@ -437,7 +438,7 @@ button {
 
 @media (max-width: 360px) {
   .top-bar {
-    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 
   .top-bar__title.MuiTypography-root {
@@ -449,18 +450,18 @@ button {
   }
 
   .floating-node--category {
-    width: clamp(76px, 16svh, 96px);
-    height: clamp(76px, 16svh, 96px);
+    width: clamp(64px, 14svh, 84px);
+    height: clamp(64px, 14svh, 84px);
   }
 
   .floating-node--category.floating-node--anchored {
-    width: clamp(82px, 14.4svh, 96px);
-    height: clamp(82px, 14.4svh, 96px);
+    width: clamp(56px, 12.5svh, 80px);
+    height: clamp(56px, 12.5svh, 80px);
   }
 
   .floating-node--artwork {
-    width: clamp(82px, 14.4svh, 96px);
-    height: clamp(82px, 14.4svh, 96px);
+    width: clamp(56px, 12.5svh, 80px);
+    height: clamp(56px, 12.5svh, 80px);
   }
 
   .category-bubble__label {
@@ -483,6 +484,19 @@ button {
 
   .artwork-detail-line {
     font-size: 9px;
+  }
+}
+
+@media (max-height: 620px) and (max-width: 640px) {
+  .floating-node--category {
+    width: clamp(64px, 14svh, 90px);
+    height: clamp(64px, 14svh, 90px);
+  }
+
+  .floating-node--category.floating-node--anchored,
+  .floating-node--artwork {
+    width: clamp(56px, 12.5svh, 80px);
+    height: clamp(56px, 12.5svh, 80px);
   }
 }
 

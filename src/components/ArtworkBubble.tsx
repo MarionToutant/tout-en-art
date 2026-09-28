@@ -11,13 +11,13 @@ export default function ArtworkBubble({
   mediaFile,
   title,
   subtitle,
-  description,
+  year,
   isSelected,
   onSelect,
 }: IArtworkBubbleProps) {
   const detailsId = `artwork-details-${useId()}`;
   const photoRef = useRef<HTMLImageElement | null>(null);
-  const accessibleLabel = [title, subtitle, description].filter(Boolean).join(', ') || 'Œuvre';
+  const accessibleLabel = [title, subtitle, year].filter(Boolean).join(', ') || 'Œuvre';
 
   useEffect(() => {
     if (!isSelected) {
@@ -60,7 +60,7 @@ export default function ArtworkBubble({
       >
         {title ? <span className="artwork-title">{title}</span> : null}
         {subtitle ? <span className="artwork-detail-line">{subtitle}</span> : null}
-        {description ? <span className="artwork-detail-line">{description}</span> : null}
+        {year ? <span className="artwork-detail-line">{year}</span> : null}
       </span>
     </BubbleBase>
   );

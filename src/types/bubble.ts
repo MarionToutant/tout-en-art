@@ -2,7 +2,7 @@ export interface BubbleData {
   readonly mediaFile: string;
   readonly title?: string;
   readonly subtitle?: string;
-  readonly description?: string;
+  readonly year?: string;
 }
 
 export interface Section {
