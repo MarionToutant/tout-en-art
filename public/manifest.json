@@ -1,6 +1,6 @@
 {
-  "short_name": "Art Tout-En-M",
-  "name": "Art Tout-En-M",
+  "short_name": "TOUT-EN-ART",
+  "name": "TOUT-EN-ART",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#f4f5ef",
   "background_color": "#ffffff"
 }

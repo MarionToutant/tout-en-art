@@ -1,36 +1,108 @@
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import ArtworkBubble from './ArtworkBubble';
+import CategoryBubble from './CategoryBubble';
+import FloatingField, { type FloatingFieldItem } from './FloatingField';
 import TopBar from './TopBar';
-import CardItem from './CardItem';
-import { sections } from '../data/cards';
-import concertImg from '../media/landscapes/concert.jpg';
+import { sections } from '../data/bubbles';
+import type { BubbleData } from '../types/bubble';
+import useArtworkSelection from '../hooks/useArtworkSelection';
+import useBubbleVisibilityCycle from '../hooks/useBubbleVisibilityCycle';
+import useCategoryNavigation from '../hooks/useCategoryNavigation';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+import '../styles/BubbleScene.css';
+
+const bubbleHandoffDuration = 3000;
 
 export default function Home() {
+  const isMotionReduced = usePrefersReducedMotion();
+  const { activeSection, activeSectionIndex, burstingSectionIndex, openSection, returnToCategories } = useCategoryNavigation(isMotionReduced);
+  const { activePointerArtworkRef, clearSelection, selectedArtwork, selectedArtworkRef, setActivePointerArtwork, toggleArtwork } = useArtworkSelection();
+  const cycleBubbleIds = activeSection
+    ? activeSection.bubbles.map((bubble) => `artwork:${bubble.mediaFile}`)
+    : sections.map((section) => `category:${section.title}`);
+  const { hiddenBubbleId } = useBubbleVisibilityCycle({
+    viewKey: activeSection ? `artworks:${activeSection.title}` : 'categories',
+    bubbleIdsSignature: cycleBubbleIds.join('\u0000'),
+    handoffDuration: bubbleHandoffDuration,
+    isMotionReduced,
+    selectedArtworkRef,
+    activePointerArtworkRef,
+  });
+
+  const returnToMenu = () => {
+    returnToCategories();
+    clearSelection();
+  };
+
+  const floatingItems: FloatingFieldItem[] = activeSection
+    ? [
+      {
+        id: `category:${activeSection.title}`,
+        kind: 'category',
+        anchor: 'left',
+        isExpanded: selectedArtwork !== null,
+        role: 'listitem',
+        content: (
+          <CategoryBubble
+            title={activeSection.title}
+            mediaFile={activeSection.coverMediaFile ?? activeSection.bubbles[0].mediaFile}
+            mode="parent"
+            onClick={returnToMenu}
+          />
+        ),
+      },
+      ...activeSection.bubbles.map((bubble) => {
+        const id = `artwork:${bubble.mediaFile}`;
+        return {
+        id,
+        kind: 'artwork' as const,
+        role: 'listitem' as const,
+        isVisible: isMotionReduced || id !== hiddenBubbleId,
+        isExpanded: selectedArtwork === bubble.mediaFile,
+        content: (
+          <ArtworkBubble
+            {...bubble}
+            isSelected={selectedArtwork === bubble.mediaFile}
+            onSelect={() => toggleArtwork(bubble.mediaFile)}
+          />
+        ),
+      };}),
+    ]
+    : sections.map((section, sectionIndex) => ({
+      id: `category:${section.title}`,
+      kind: 'category' as const,
+      isVisible: isMotionReduced || `category:${section.title}` !== hiddenBubbleId,
+      content: (
+        <CategoryBubble
+          title={section.title}
+          mediaFile={section.coverMediaFile ?? section.bubbles[0].mediaFile}
+          mode="menu"
+          isBursting={burstingSectionIndex === sectionIndex}
+          onClick={() => openSection(sectionIndex)}
+        />
+      ),
+    }));
+
   return (
-    <Box>
-      <TopBar
-        height={{ xs: 220, sm: 360, md: 550 }}
-        backgroundFile={concertImg}
-        title="Tout-en-M"
-        subtitle="Créations artistiques"
-      />
-      <Grid container display="flex" gap={6} sx={{ padding: { xs: '18px 12px', sm: '32px 24px' } }}>
-        {sections.map((section) => (
-          <Grid key={section.title} item xs={12} container spacing={{ xs: 2, sm: 3, md: 4 }}>
-            <Grid item xs={12}>
-              <Typography variant="h5" textTransform="uppercase" fontWeight={300} color="text.secondary">
-                {section.title}
-              </Typography>
-            </Grid>
-            {section.cards.map((card) => (
-              <Grid item key={card.title ?? card.mediaFile} xs={12} sm={6} md={4} lg={3}>
-                <CardItem {...card} />
-              </Grid>
-            ))}
-          </Grid>
-        ))}
-      </Grid>
+    <Box component="main" className="home-shell">
+      <TopBar title="TOUT-EN-ART" />
+      <Box className="gallery-scene">
+        <Box
+          component="section"
+          className={`field-stage${activeSection ? ' field-stage--artworks' : ''}`}
+          aria-label={activeSection ? activeSection.title : 'Catégories'}
+          key={activeSection?.title ?? 'categories'}
+        >
+          <FloatingField
+            items={floatingItems}
+            ariaLabel={activeSection ? `Œuvres de ${activeSection.title}` : 'Catégories'}
+            isMotionReduced={isMotionReduced}
+            className={activeSection ? 'artwork-field' : 'category-field'}
+            role={activeSection ? 'list' : 'region'}
+            onInteractionChange={setActivePointerArtwork}
+          />
+        </Box>
+      </Box>
     </Box>
   );
 }
