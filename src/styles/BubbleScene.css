@@ -40,8 +40,6 @@ button {
   height: 100svh;
   overflow: hidden;
   background-color: var(--paper);
-  background-image: radial-gradient(rgba(32, 43, 37, 0.11) 0.65px, transparent 0.8px);
-  background-size: 18px 18px;
 }
 
 .top-bar {
@@ -173,20 +171,25 @@ button {
   cursor: pointer;
   isolation: isolate;
   text-align: center;
-  transition: box-shadow 180ms ease, filter 180ms ease;
+  transition: opacity 500ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
-.category-bubble {
-  background-image: linear-gradient(135deg, rgba(22, 27, 24, 0.32), rgba(22, 27, 24, 0.62)), var(--bubble-image);
-  background-position: center;
-  background-size: cover;
+.bubble--image-pending {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bubble--image-loaded {
+  opacity: 1;
+  visibility: visible;
 }
 
 .category-bubble__scrim {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(180deg, rgba(22, 27, 24, 0.08) 15%, rgba(22, 27, 24, 0.38) 100%);
+  background: linear-gradient(135deg, rgba(22, 27, 24, 0.32), rgba(22, 27, 24, 0.62)), linear-gradient(180deg, rgba(22, 27, 24, 0.08) 15%, rgba(22, 27, 24, 0.38) 100%);
 }
 
 .category-bubble__label {
@@ -260,7 +263,7 @@ button {
   box-shadow: var(--bubble-shadow-raised);
 }
 
-.artwork-photo {
+.bubble-image {
   position: absolute;
   z-index: -2;
   inset: 0;
@@ -270,8 +273,11 @@ button {
   object-fit: cover;
   object-position: center;
   pointer-events: none;
-  transition: object-position 80ms linear;
   -webkit-user-drag: none;
+}
+
+.artwork-photo {
+  transition: object-position 80ms linear;
 }
 
 .artwork-button--selected::after {

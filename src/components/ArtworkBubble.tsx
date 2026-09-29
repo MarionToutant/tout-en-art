@@ -1,5 +1,6 @@
-import { useEffect, useId, useRef, type PointerEvent as ReactPointerEvent } from 'react';
+import { useEffect, useId, type PointerEvent as ReactPointerEvent } from 'react';
 import type { BubbleData } from '../types/bubble';
+import useLoadedImage from '../hooks/useLoadedImage';
 import BubbleBase from './BubbleBase';
 
 interface IArtworkBubbleProps extends BubbleData {
@@ -16,7 +17,7 @@ export default function ArtworkBubble({
   onSelect,
 }: IArtworkBubbleProps) {
   const detailsId = `artwork-details-${useId()}`;
-  const photoRef = useRef<HTMLImageElement | null>(null);
+  const { imageRef: photoRef, isLoaded, onLoad } = useLoadedImage(mediaFile);
   const accessibleLabel = [title, subtitle, year].filter(Boolean).join(', ') || 'Œuvre';
 
   useEffect(() => {
@@ -44,15 +45,17 @@ export default function ArtworkBubble({
 
   return (
     <BubbleBase
-      className={`artwork-button${isSelected ? ' artwork-button--selected' : ''}`}
+      className={`artwork-button${isSelected ? ' artwork-button--selected' : ''}${isLoaded ? ' bubble--image-loaded' : ' bubble--image-pending'}`}
       onClick={onSelect}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetArtworkFocus}
       aria-label={`${accessibleLabel}. ${isSelected ? 'Masquer les informations' : 'Afficher les informations'}`}
+      aria-hidden={!isLoaded}
       aria-expanded={isSelected}
       aria-controls={detailsId}
+      tabIndex={isLoaded ? undefined : -1}
     >
-      <img ref={photoRef} className="artwork-photo" src={mediaFile} alt="" draggable={false} loading="lazy" decoding="async" />
+      <img ref={photoRef} className="bubble-image artwork-photo" src={mediaFile} alt="" draggable={false} loading="eager" decoding="async" onLoad={onLoad} />
       <span
         className={`artwork-information${isSelected ? ' artwork-information--visible' : ''}`}
         id={detailsId}
